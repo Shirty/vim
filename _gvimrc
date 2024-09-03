@@ -1,0 +1,5 @@
+set visualbell
+set t_vb=
+
+set guifont=Cascadia_Mono:h10:cANSI:qDRAFT
+set guioptions=
