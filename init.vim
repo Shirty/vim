@@ -31,6 +31,7 @@ nnoremap <silent> K :call ShowDocumentation()<CR>
 
 nnoremap <silent><nowait> <leader>s :<C-u>CocList -I symbols<cr>
 nnoremap <silent><nowait> <leader>c :<C-u>CocList commands<cr>
+nnoremap <silent><nowait> <leader>o :<C-u>CocList outline<cr>
 
 
 lua << EOF

@@ -7,6 +7,7 @@ noremap <leader>q :q<cr>
 noremap <leader>Q :q!<cr>
 noremap <M-i> :cnext<cr>
 noremap <M-o> :cprevious<cr>
+nnoremap <leader>n :noh<cr>
 
 colorscheme darkblue
 " darkblue
@@ -15,7 +16,10 @@ colorscheme darkblue
 " elflord
 " murphy
 
-set cursorline
+if !exists("g:neovide")
+	set cursorline
+set cursorlineopt=screenline
+endif
 
 set relativenumber
 set numberwidth=10
