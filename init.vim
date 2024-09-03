@@ -10,6 +10,10 @@ source ~/_vimrc
 " - install clangd through coc.vim ( write up how here again so it's not
 "   forgotten )
 
+" TODO
+" - map <localleader>s for vimscript to source file
+" - keep one file not 2
+
 call plug#begin()
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() }}
@@ -17,9 +21,21 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
+" coc
+nnoremap <silent> gd <Plug>(coc-definition)
+nnoremap <silent> gy <Plug>(coc-type-definition)
+nnoremap <silent> gi <Plug>(coc-implementation)
+nnoremap <silent> gr <Plug>(coc-references)
+
+nnoremap <silent> K :call ShowDocumentation()<CR>
+
+nnoremap <silent><nowait> <leader>s :<C-u>CocList -I symbols<cr>
+nnoremap <silent><nowait> <leader>c :<C-u>CocList commands<cr>
+
+
 lua << EOF
 require'nvim-treesitter.configs'.setup {
-	ensure_installed = {"c", "lua", "vim", "vimdoc", "cpp" },
+	ensure_installed = {"c", "lua", "vim", "vimdoc", "cpp", "hlsl" },
 	sync_install = false,
 	-- auto_install = false
 	highlight = {
@@ -27,6 +43,24 @@ require'nvim-treesitter.configs'.setup {
 	}
 }
 EOF
+
+if exists("g:neovide")
+	set guifont=Cascadia\ Mono:h10
+
+	function! ToggleFullscreen()
+		if g:neovide_fullscreen == v:true
+			let g:neovide_fullscreen = v:false
+		else
+			let g:neovide_fullscreen = v:true
+		endif
+	endfunction
+
+	let g:neovide_cursor_animation_length = 0.05
+	let g:neovide_scroll_animation_length = 0.1
+
+	nnoremap <leader>uf :call ToggleFullscreen()<cr>
+
+endif
 
 
 " " taken directly from https://lazy.folke.io/installation
